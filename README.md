@@ -1,3 +1,3 @@
 # go-http
 
-go-http is a test server app using the Go net/http and net/url packages.
+go-http is a demo server app written to learn more about Go and the net/http and time packages.
