@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-func handler(w http.ResponseWriter, r *http.Request) {
+func logURL(w http.ResponseWriter, r *http.Request) {
 	log.Println(r.Host + r.URL.Path)
 	t := time.Now().Format("2006-1-2 3:04:05")
 	fmt.Fprintf(w, "%s\t%s", t, r.Host+r.URL.Path)
@@ -23,7 +23,7 @@ func main() {
 	defer f.Close()
 	log.SetOutput(f)
 
-	http.HandleFunc("/", handler)
+	http.HandleFunc("/", logURL)
 	err = http.ListenAndServe(":8000", nil)
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
