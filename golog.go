@@ -2,16 +2,21 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
-	"time"
 )
 
 func logURL(w http.ResponseWriter, r *http.Request) {
+	// write URL to log file
 	log.Println(r.Host + r.URL.Path)
-	t := time.Now().Format("2006-1-2 3:04:05")
-	fmt.Fprintf(w, "%s\t%s", t, r.Host+r.URL.Path)
+	// write log file to response
+	urls, err := ioutil.ReadFile("urls.log")
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Fprintf(w, "%s", string(urls))
 }
 
 func main() {
